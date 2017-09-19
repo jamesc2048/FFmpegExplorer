@@ -12,7 +12,7 @@ build_script:
 after_build:
     - echo after build
     - mkdir deploy
-    - copy FfmpegGUI\release\FfmpegGUI.exe deploy\FfmpegGUI.exe
+    - copy release\FfmpegGUI.exe deploy\FfmpegGUI.exe
     - windeployqt --release --no-translations --no-opengl-sw deploy\FfmpegGUI.exe
     - 7z a testingArch.zip .\deploy\*
 
