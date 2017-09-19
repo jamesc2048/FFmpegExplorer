@@ -4,12 +4,12 @@
 
 Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
 {
-    qsu = QSimpleUpdater::getInstance();
+//    qsu = QSimpleUpdater::getInstance();
 
-    connect (qsu, SIGNAL (checkingFinished  (QString)),
-               this,        SLOT (updateChangelog   (QString)));
-    connect (qsu, SIGNAL (appcastDownloaded (QString, QByteArray)),
-               this,        SLOT (displayAppcast    (QString, QByteArray)));
+//    connect (qsu, SIGNAL (checkingFinished  (QString)),
+//               this,        SLOT (updateChangelog   (QString)));
+//    connect (qsu, SIGNAL (appcastDownloaded (QString, QByteArray)),
+//               this,        SLOT (displayAppcast    (QString, QByteArray)));
 }
 
 bool Application::notify(QObject *receiver, QEvent *event)

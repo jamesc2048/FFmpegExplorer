@@ -16,9 +16,7 @@ ItemDelegate {
 
     //clicked: null // TODO: navigate to other page on click for details?
 
-    Component {
-        id: text
-    }
+
 
     RowLayout {
         anchors.fill: parent
