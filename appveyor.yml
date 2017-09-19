@@ -8,6 +8,7 @@ install:
 build_script:
 - cmd: >-
     cd C:\projects\ffmpeggui
+    
     qmake FFmpegGUI.pro
 
     nmake
