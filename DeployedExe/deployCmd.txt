@@ -1,3 +1,0 @@
-Open QT 5.9.1 cmd line (search for "Qt 5.9.1" in start menu)
-
-windeployqt --qmldir "D:\James Data\Bitbucket\FfmpegGUI\FfmpegGUI" FfmpegGUI.exe

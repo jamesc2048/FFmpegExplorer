@@ -12,7 +12,7 @@ build_script:
 after_build:
     - mkdir deploy
     - copy release\FfmpegGUI.exe deploy\FfmpegGUI.exe
-    - windeployqt --release --no-translations --no-opengl-sw deploy\FfmpegGUI.exe
+    - windeployqt --release --no-translations --no-opengl-sw --qmldir . deploy\FfmpegGUI.exe
     - 7z a ..\Release.zip .\deploy\*
 
 artifacts:
