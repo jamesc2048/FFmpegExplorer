@@ -7,8 +7,8 @@ install:
     set PATH=%PATH%;%QTDIR%\bin;
 build_script:
 - cmd: >-
-    cd C:\projects\ffmpeggui
-    
-    qmake FFmpegGUI.pro
+    cd C:\projects\ffmpeggui\FfmpegGUI
+
+    qmake FfmpegGUI.pro
 
     nmake
