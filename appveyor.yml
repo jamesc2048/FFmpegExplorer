@@ -10,11 +10,10 @@ build_script:
     - nmake
 
 after_build:
-    - echo after build
     - mkdir deploy
     - copy release\FfmpegGUI.exe deploy\FfmpegGUI.exe
     - windeployqt --release --no-translations --no-opengl-sw deploy\FfmpegGUI.exe
-    - 7z a testingArch.zip .\deploy\*
+    - 7z a ..\Release.zip .\deploy\*
 
 artifacts:
-    - path: FfmpegGUI\testingArch.zip
+    - path: Release.zip
