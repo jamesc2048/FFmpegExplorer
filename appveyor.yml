@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 0.1.{build}
 image: Visual Studio 2017
 install:
     - set QTDIR=C:\Qt\5.9.1\msvc2017_64
@@ -17,4 +17,4 @@ after_build:
     - 7z a testingArch.zip .\deploy\*
 
 artifacts:
-    - path: testingArch.zip
+    - path: FfmpegGUI\testingArch.zip
