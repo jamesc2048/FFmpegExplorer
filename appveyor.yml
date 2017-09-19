@@ -1,0 +1,13 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+install:
+- cmd: >-
+    set QTDIR=C:\Qt\5.9.1\msvc2017_64
+
+    set PATH=%PATH%;%QTDIR%\bin;
+build_script:
+- cmd: >-
+    cd C:\projects\ffmpeggui
+    qmake FFmpegGUI.pro
+
+    nmake
