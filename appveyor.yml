@@ -1,16 +1,20 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 install:
-- cmd: >-
-    set QTDIR=C:\Qt\5.9.1\msvc2017_64
-
-    set PATH=%PATH%;%QTDIR%\bin;
+    - set QTDIR=C:\Qt\5.9.1\msvc2017_64
+    - set PATH=%PATH%;%QTDIR%\bin;
 build_script:
-- cmd: >-
-    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
-    
-    cd "C:\projects\ffmpeggui\FfmpegGUI"
+    - "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+    - cd FfmpegGUI
+    - qmake FfmpegGUI.pro
+    - nmake
 
-    qmake FfmpegGUI.pro
+after_build:
+    - echo after build
+    - mkdir deploy
+    - copy FfmpegGUI\release\FfmpegGUI.exe deploy\FfmpegGUI.exe
+    - windeployqt --release --no-translations --no-opengl-sw deploy\FfmpegGUI.exe
+    - 7z a testingArch.zip .\deploy\*
 
-    nmake
+artifacts:
+    - path: testingArch.zip
