@@ -10,6 +10,7 @@ Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
 //               this,        SLOT (updateChangelog   (QString)));
 //    connect (qsu, SIGNAL (appcastDownloaded (QString, QByteArray)),
 //               this,        SLOT (displayAppcast    (QString, QByteArray)));
+    examineFfmpeg();
 }
 
 bool Application::notify(QObject *receiver, QEvent *event)
@@ -24,4 +25,13 @@ bool Application::notify(QObject *receiver, QEvent *event)
     }
 
     return false;
+}
+
+void Application::examineFfmpeg()
+{
+    QProcess ffmpegProcess;
+
+    ffmpegProcess.start("ffmpeg", { "-h", "encoder=libx264" });
+    ffmpegProcess.waitForFinished();
+    qDebug() << ffmpegProcess.readAllStandardOutput().split('\n');
 }
