@@ -25,7 +25,7 @@ void FfmpegCapabilities::analyseFfmpeg()
 
             qDebug() << codec << codecCaps << codecDescription;
 
-            encoderCapabilities.append({ codecCaps, codec, codecDescription });
+            //encoderCapabilities.append({ codecCaps, codec, codecDescription });
         }
     }
 }
