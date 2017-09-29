@@ -9,7 +9,9 @@ CONFIG += c++11 qtquickcompiler
 SOURCES += main.cpp \
     encoder.cpp \
     qmlutils.cpp \
-    application.cpp
+    application.cpp \
+    ffmpegcapabilities.cpp \
+    utilities.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,6 +52,8 @@ HEADERS += \
     encoder.h \
     common.h \
     qmlutils.h \
-    application.h
+    application.h \
+    ffmpegcapabilities.h \
+    utilities.h
 
 include ($$PWD/../3rdparty/QSimpleUpdater-master/QSimpleUpdater.pri)

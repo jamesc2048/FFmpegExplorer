@@ -1,7 +1,5 @@
 #include "application.h"
 
-
-
 Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
 {
 //    qsu = QSimpleUpdater::getInstance();
@@ -10,6 +8,8 @@ Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
 //               this,        SLOT (updateChangelog   (QString)));
 //    connect (qsu, SIGNAL (appcastDownloaded (QString, QByteArray)),
 //               this,        SLOT (displayAppcast    (QString, QByteArray)));
+    findOrDownloadFfmpegBinary();
+
     examineFfmpeg();
 }
 
@@ -27,11 +27,21 @@ bool Application::notify(QObject *receiver, QEvent *event)
     return false;
 }
 
+
+void Application::findOrDownloadFfmpegBinary()
+{
+//    // Is it in path? Use that.
+//    QString ffmpegOut = Utilities::getCommandOutput(, {});
+
+//    if (!ffmpegOut.isEmpty())
+//    {
+//        return;
+//    }
+}
+
 void Application::examineFfmpeg()
 {
-    QProcess ffmpegProcess;
+    ffmpegCapabilities = std::make_unique<FfmpegCapabilities>();
 
-    ffmpegProcess.start("ffmpeg", { "-h", "encoder=libx264" });
-    ffmpegProcess.waitForFinished();
-    qDebug() << ffmpegProcess.readAllStandardOutput().split('\n');
+    ffmpegCapabilities->analyseFfmpeg();
 }

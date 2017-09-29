@@ -7,11 +7,14 @@
     #include <Windows.h>
 #endif
 
+// STD headers
 #include <iostream>
 #include <vector>
 #include <chrono>
 #include <tuple>
+#include <memory>
 
+// QT headers
 #include <QtCore>
 #include <QtGui>
 #include <QtQml>
@@ -21,6 +24,8 @@
 #include <QtConcurrent>
 //#include <QtWinExtras>
 
+// Application headers
 #include "QSimpleUpdater.h"
+#include "utilities.h"
 
 #endif // PCH_H
