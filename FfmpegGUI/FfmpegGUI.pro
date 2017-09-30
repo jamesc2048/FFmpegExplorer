@@ -56,4 +56,3 @@ HEADERS += \
     ffmpegcapabilities.h \
     utilities.h
 
-include ($$PWD/../3rdparty/QSimpleUpdater-master/QSimpleUpdater.pri)

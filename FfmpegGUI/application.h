@@ -7,7 +7,6 @@
 class Application : public QGuiApplication
 {
 private:
-    QSimpleUpdater *qsu;
     std::unique_ptr<FfmpegCapabilities> ffmpegCapabilities;
     QString ffmpegPath;
 

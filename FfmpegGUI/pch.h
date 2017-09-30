@@ -25,7 +25,6 @@
 //#include <QtWinExtras>
 
 // Application headers
-#include "QSimpleUpdater.h"
 #include "utilities.h"
 
 #endif // PCH_H
