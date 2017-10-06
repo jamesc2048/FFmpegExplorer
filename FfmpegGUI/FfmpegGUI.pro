@@ -17,6 +17,8 @@ RESOURCES += qml.qrc
 
 PRECOMPILED_HEADER = pch.h
 
+RC_ICONS = icon.ico
+
 CONFIG(debug, debug|release ) {
     # debug
     # message("debug!")
