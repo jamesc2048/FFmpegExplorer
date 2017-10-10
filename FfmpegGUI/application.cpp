@@ -23,6 +23,10 @@ bool Application::notify(QObject *receiver, QEvent *event)
     {
         qCritical() << "std::exception thrown. type: " << typeid(e).name() << " details: " << e.what();
     }
+    catch (...)
+    {
+        qCritical() << "unknown exception thrown";
+    }
 
     return false;
 }
