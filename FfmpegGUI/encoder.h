@@ -16,6 +16,7 @@ class EncodeItemViewModel : public QObject
     QML_WRITABLE_PROPERTY(QString, name)
     QML_WRITABLE_PROPERTY(bool, isEncoding)
     QML_WRITABLE_PROPERTY(bool, isComplete)
+    QML_WRITABLE_PROPERTY(bool, isPaused)
     QML_WRITABLE_PROPERTY(bool, hasError)
 
     QProcess *m_encodeProcess;
@@ -31,8 +32,8 @@ public:
     EncodeItemViewModel(QString path, QObject *parent = nullptr);
 
     void startEncode();
-
     void processFfmpegOutput(QString ffmpegOutput);
+    void pauseResumeEncoding();
 };
 
 class Encoder : public QObject
@@ -60,6 +61,7 @@ public slots:
     void addToEncode(QUrl url);
     void addToEncodeFromDirectory(QUrl url);
     void removeFromEncode(int index);
+    void pauseResumeEncoding();
 };
 
 #endif // ENCODER_H

@@ -7,7 +7,10 @@ import QtQuick.Dialogs 1.2
 RowLayout {
     property var modelData
 
-Text { text: modelData.name }
-Button { text: "click"
-    onClicked: stackView.pop() }
+    Text { text: modelData.name }
+
+    Button {
+        text: "click"
+        onClicked: stackView.pop()
+    }
 }

@@ -7,6 +7,7 @@ EncodeItemViewModel::EncodeItemViewModel(QString path, QObject *parent) : QObjec
     m_progress = 0;
     m_duration = 0;
     m_isComplete = false;
+    m_isPaused = false;
     m_isEncoding = false;
     m_encodeProcess = nullptr;
 
@@ -134,6 +135,36 @@ void EncodeItemViewModel::processFfmpegOutput(QString ffmpegOutput)
     }
 }
 
+typedef LONG (NTAPI *NtSuspendProcess)(IN HANDLE ProcessHandle);
+
+void EncodeItemViewModel::pauseResumeEncoding()
+{
+    // TODO Windows specific!
+    Q_PID procInfo = m_encodeProcess->pid();
+    qWarning() << "procInfo" << procInfo;
+    //PROCESS_INFORMATION * processInfo = procId;
+
+    HANDLE handle = procInfo->hProcess;
+
+    NtSuspendProcess pfnNtSuspendProcess = (NtSuspendProcess)GetProcAddress(GetModuleHandle(L"ntdll"), "NtSuspendProcess");
+    NtSuspendProcess pfnNtResumeProcess = (NtSuspendProcess)GetProcAddress(GetModuleHandle(L"ntdll"), "NtResumeProcess");
+
+    if (!get_isPaused())
+    {
+        qWarning() << "Pausing encoding for " << procInfo << handle;
+        pfnNtSuspendProcess(handle);
+
+        set_isPaused(true);
+    }
+    else
+    {
+        qWarning() << "Resuming encoding for " << procInfo << handle;
+        pfnNtResumeProcess(handle);
+
+        set_isPaused(false);
+    }
+}
+
 Encoder::Encoder(QObject *parent) : QObject(parent)
 {
     m_encodeModel = new QQmlObjectListModel<EncodeItemViewModel>(this);
@@ -222,4 +253,16 @@ void Encoder::removeFromEncode(int index)
     m_encodeModel->remove(index);
 
     encodeModel->deleteLater();
+}
+
+void Encoder::pauseResumeEncoding()
+{
+    for (EncodeItemViewModel *model : (*m_encodeModel).toList())
+    {
+        if (model->get_isEncoding())
+        {
+            qDebug() << "Toggling pause for this encode";
+            model->pauseResumeEncoding();
+        }
+    }
 }

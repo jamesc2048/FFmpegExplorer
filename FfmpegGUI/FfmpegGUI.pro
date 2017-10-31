@@ -4,7 +4,7 @@ QT += qml quick quickcontrols2 network sql concurrent
 
 VERSION = 0.1.0.0
 
-CONFIG += c++11 qtquickcompiler
+CONFIG += c++17 qtquickcompiler
 
 SOURCES += main.cpp \
     encoder.cpp \

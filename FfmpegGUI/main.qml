@@ -71,6 +71,13 @@ ApplicationWindow {
                         directoryDialog.open()
                     }
                 }
+
+                Button {
+                    text: "Pause/Resume Encode"
+                    Layout.fillWidth: true
+
+                    onClicked: encoder.pauseResumeEncoding()
+                }
             }
         }
     }
