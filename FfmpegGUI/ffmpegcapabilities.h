@@ -32,11 +32,14 @@ class FfmpegCapabilities : public QObject
 
 public:
     AnalysisState analysisState;
+    QString ffmpegFilePath;
 
     QList<EncoderCapabilities> encoderCapabilities;
 
     explicit FfmpegCapabilities(QObject *parent = nullptr);
     void analyseFfmpeg();
+    void checkForFfmpegInstallation();
+    bool downloadFfmpeg(QString path);
 
 signals:
 

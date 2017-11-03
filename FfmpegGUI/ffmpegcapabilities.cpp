@@ -3,6 +3,8 @@
 FfmpegCapabilities::FfmpegCapabilities(QObject *parent) : QObject(parent)
 {
     analysisState = AnalysisState::NotAnalysed;
+
+    checkForFfmpegInstallation();
 }
 
 void FfmpegCapabilities::analyseFfmpeg()
@@ -28,4 +30,60 @@ void FfmpegCapabilities::analyseFfmpeg()
             //encoderCapabilities.append({ codecCaps, codec, codecDescription });
         }
     }
+}
+
+void FfmpegCapabilities::checkForFfmpegInstallation()
+{
+    // TODO windows only!
+    ffmpegFilePath = QStandardPaths::findExecutable("ffmpeg");
+
+    if (ffmpegFilePath.isEmpty())
+    {
+        ffmpegFilePath = QStandardPaths::findExecutable("ffmpeg", { QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) });
+    }
+
+    if (ffmpegFilePath.isEmpty())
+    {
+        QString path =
+                QDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)).filePath("ffmpeg.exe");
+
+        downloadFfmpeg(path);
+    }
+
+    QProcess ffmpegProcess;
+
+    ffmpegProcess.start(ffmpegFilePath);
+    ffmpegProcess.waitForFinished();
+
+    if (ffmpegProcess.error() != QProcess::UnknownError)
+    {
+        // ffmpeg not present! download
+        // TODO UI for this.
+
+    }
+}
+
+bool FfmpegCapabilities::downloadFfmpeg(QString pathToSave)
+{
+    QNetworkAccessManager nam;
+
+    QNetworkRequest req(QUrl("https://crisafulli.me/public/ffmpeg-3.4-win64-static/bin/ffmpeg.exe"));
+    QNetworkReply *reply = nam.get(req);
+
+    QEventLoop loop;
+    connect(&nam, &QNetworkAccessManager::finished, &loop,
+                [&](QNetworkReply *r) { loop.quit(); });
+
+    loop.exec();
+
+    QByteArray data = reply->readAll();
+    QFile f(pathToSave);
+    f.open(QIODevice::WriteOnly);
+
+    f.write(data);
+    f.close();
+
+    reply->deleteLater();
+
+    return true;
 }
