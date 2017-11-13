@@ -233,7 +233,9 @@ void Encoder::addToEncodeFromDirectory(QUrl url)
         auto file = it.next();
         qWarning() << file;
 
-        if (!file.endsWith("-enc.mp4"))
+        // don't encode if encoded, don't encode if has already been encoded
+        // TODO add option to control this!
+        if (!file.endsWith("-enc.mp4") && !QFile(file + "-enc.mp4").exists())
         {
             addToEncode(QUrl::fromLocalFile(file));
         }
