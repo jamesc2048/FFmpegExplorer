@@ -11,6 +11,8 @@ Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
     findOrDownloadFfmpegBinary();
 
     examineFfmpeg();
+
+
 }
 
 bool Application::notify(QObject *receiver, QEvent *event)
@@ -49,3 +51,41 @@ void Application::examineFfmpeg()
 
     ffmpegCapabilities->analyseFfmpeg();
 }
+
+//void Application::checkForUpdates()
+//{
+//    QtConcurrent::run([]()
+//    {
+//        qDebug() << __FUNCTION__;
+//        QNetworkAccessManager nam;
+//        QNetworkRequest req(QUrl("https://crisafulli.me/ffmpegexplorer/versioncheck"));
+
+//        req.setHeader(QNetworkRequest::KnownHeaders::UserAgentHeader, QString("FFmpeg GUI version %1").arg(APP_VERSION));
+
+//        QNetworkReply *reply = nam.get(req);
+//        QByteArray bytes = reply->readAll();
+
+//        qDebug("Received reply from server: %s", bytes.data());
+
+//        QList<QByteArray> versionNums = bytes.split('.');
+
+//        if (versionNums.length() == 4)
+//        {
+//            qDebug("Split version in 3 parts: %s", versionNums.join(", ").data());
+//            QVersionNumber num(versionNums[0].toInt(), versionNums[1].toInt(), versionNums[2].toInt());
+
+//            auto splitCurrentVersion = QString(APP_VERSION).split('.');
+
+
+//            // alert user new version is available
+//            // TODO
+//        }
+//        else
+//        {
+
+//        }
+
+//        reply->deleteLater();
+//    });
+//}
+

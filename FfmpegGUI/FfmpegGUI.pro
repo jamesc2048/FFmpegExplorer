@@ -3,6 +3,7 @@ QT += qml quick quickcontrols2 network sql concurrent
 # QT += winextras // not working?
 
 VERSION = 0.1.0.0
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 CONFIG += c++17 qtquickcompiler
 

@@ -1,17 +1,34 @@
 import QtQuick 2.7
+import QtQml 2.2
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
 import Encoder 1.0
 
-
-
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
     title: "Ffmpeg GUI"
+
+    Component.onCompleted: {
+        console.log("Application Window instantiated");
+
+        timer.running = true;
+    }
+
+    Timer {
+        id: timer
+        interval: 2000
+        repeat: false
+        //onTriggered: checkForUpdates();
+    }
+
+    //Component.onDestroyed: console.log("destroyed");
+    Component.onDestruction: console.log("Application Window destroyed");
+    //Component.onStatusChanged: console.log("status changed " + status)
+    //Component.onProgressChanged: console.log("progress changed " + progress);
 
     Encoder {
         id: encoder
@@ -115,14 +132,31 @@ ApplicationWindow {
         }
     }
 
-//    footer: TabBar {
-//        id: tabBar
-//        currentIndex: swipeView.currentIndex
-//        TabButton {
-//            text: qsTr("First")
+    function checkForUpdates() {
+        Utilities.getWebResponse("https://crisafulli.me/ffmpegexplorer/versioncheck", function(response) {
+            console.log(response);
+        });
+    }
+
+//    function checkForUpdates() {
+//        console.log("checkForUpdates start");
+//        var req = new XMLHttpRequest();
+//        req.open("GET", "https://crisafulli.me/ffmpegexplorer/versioncheck", true);
+
+//        req.onreadystatechange = function() {
+//            console.log("checkForUpdates readyStateChange");
+
+//            if (req.readyState == XMLHttpRequest.DONE) {
+//                var response = req.responseText;
+
+//                console.log("Headers -->");
+//                console.log(req.getAllResponseHeaders ());
+//                console.log("Last modified -->");
+//                console.log(req.getResponseHeader ("Last-Modified"));
+//                console.log(response);
+//            }
 //        }
-//        TabButton {
-//            text: qsTr("Second")
-//        }
+
+//        req.send();
 //    }
 }

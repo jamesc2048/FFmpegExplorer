@@ -15,3 +15,19 @@ QString Utilities::getCommandOutput(const QString &exePath, const QStringList &a
 
     return {};
 }
+
+//QFuture<QString> Utilities::getCommandOutput(const QString &exePath, const QStringList &args)
+//{
+//    QProcess p;
+
+//    p.start(exePath, args);
+
+
+
+//    if (p.exitStatus() == QProcess::ExitStatus::NormalExit)
+//    {
+//        //return p.readAllStandardOutput();
+//    }
+
+//    return {};
+//}

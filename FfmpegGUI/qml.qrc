@@ -6,5 +6,6 @@
         <file>DetailsControl.qml</file>
         <file>ListControl.qml</file>
         <file>ListControlDelegate.qml</file>
+        <file>icon.ico</file>
     </qresource>
 </RCC>

@@ -4,6 +4,7 @@
 #include "pch.h"
 #include "ffmpegcapabilities.h"
 
+
 class Application : public QGuiApplication
 {
 private:

@@ -2,6 +2,7 @@
 
 #include "encoder.h"
 #include "application.h"
+#include "utilities.h"
 
 void messageHandler(QtMsgType type, const QMessageLogContext &, const QString & msg)
 {
@@ -11,7 +12,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &, const QString & 
     {
         case QtDebugMsg:
             txt = QString("Debug: %1").arg(msg);
-            break;
+        break;
 
         case QtWarningMsg:
             txt = QString("Warning: %1").arg(msg);
@@ -30,7 +31,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &, const QString & 
         break;
     }
 
-    fprintf(stderr, "%s\n", txt.toLatin1().data());
+    std::cout << txt.toLatin1().data() << std::endl;
 //    static QFile outFile("FfmpegGUI-log.txt");
 
 //    if (!outFile.isOpen())
@@ -59,16 +60,16 @@ int main(int argc, char *argv[])
     Application app(argc, argv);
 
     app.setApplicationName("FFmpeg GUI");
-    app.setApplicationVersion("0.1.0.0");
+    app.setApplicationVersion(APP_VERSION);
 
     QQmlApplicationEngine engine;
-
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    //engine.rootContext()->setContextProperty("testModel", model);
+    std::unique_ptr<QMLUtilities> utilitiesInstance = std::make_unique<QMLUtilities>();
+    engine.rootContext()->setContextProperty("Utilities", utilitiesInstance.get());
 
     return app.exec();
 }
