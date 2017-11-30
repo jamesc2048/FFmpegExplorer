@@ -226,7 +226,7 @@ void Encoder::addToEncodeFromDirectory(QUrl url)
     QDir dir(dirPath);
     qWarning() << dir.entryInfoList(QDir::Files).count();
 
-    QDirIterator it(dirPath, { "*.mp4", "*.mkv", "*.mov" }, QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator it(dirPath, { "*.mp4", "*.mkv", "*.mov", "*.wmv" }, QDir::Files, QDirIterator::Subdirectories);
 
     while (it.hasNext())
     {
