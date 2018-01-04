@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Application app(argc, argv);
 
-    app.setApplicationName("FFmpeg GUI");
+    app.setApplicationName("FFmpeg Explorer");
     app.setApplicationVersion(APP_VERSION);
 
     QQmlApplicationEngine engine;

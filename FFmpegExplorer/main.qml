@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: "Ffmpeg GUI"
+    title: "Ffmpeg Explorer"
 
     Component.onCompleted: {
         console.log("Application Window instantiated");
@@ -22,7 +22,7 @@ ApplicationWindow {
         id: timer
         interval: 2000
         repeat: false
-        //onTriggered: checkForUpdates();
+        onTriggered: checkForUpdates();
     }
 
     //Component.onDestroyed: console.log("destroyed");
@@ -133,7 +133,8 @@ ApplicationWindow {
     }
 
     function checkForUpdates() {
-        Utilities.getWebResponse("https://crisafulli.me/ffmpegexplorer/versioncheck", function(response) {
+        // BUG in Qt, this causes hang if using HTTPS.
+        Utilities.getWebResponse("http://httpbin.org/ip", function(response) {
             console.log(response);
         });
     }

@@ -23,7 +23,7 @@ public:
             qDebug() << "getWebResponse";
             QNetworkAccessManager *nam = new QNetworkAccessManager();
 
-            connect(nam, &QNetworkAccessManager::finished, [=](QNetworkReply *reply)
+            connect(nam, &QNetworkAccessManager::finished, [callback = std::move(jsCallback), nam](QNetworkReply *reply)
             {
                 qDebug() << "getWebResponse finished";
                 auto r = reply->readAll();
@@ -32,7 +32,7 @@ public:
                 nam->deleteLater();
 
                 qDebug() << "getWebResponse callback";
-                ((QJSValue)(jsCallback)).call({ QJSValue(QString(r)) });
+                ((QJSValue)(callback)).call({ QJSValue(QString(r)) });
             });
 
             qDebug() << "getWebResponse get";
