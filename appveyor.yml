@@ -11,8 +11,8 @@ build_script:
 
 after_build:
     - mkdir deploy
-    - copy release\FfmpegGUI.exe deploy\FfmpegGUI.exe
-    - windeployqt --release --no-translations --no-opengl-sw --qmldir . deploy\FfmpegGUI.exe
+    - copy release\FfmpegExplorer.exe deploy\FfmpegExplorer.exe
+    - windeployqt --release --no-translations --no-opengl-sw --qmldir . deploy\FfmpegExplorer.exe
     - 7z a ..\Release.zip .\deploy\*
 
 artifacts:
