@@ -56,10 +56,22 @@ void EncodeItemViewModel::startEncode()
         qWarning() << "procInfo" << procInfo;
         //PROCESS_INFORMATION * processInfo = procId;
 
+#ifdef Q_OS_WIN
         HANDLE handle = procInfo->hProcess;
 
         qWarning() << "Setting priority for" << procInfo << handle <<
                       SetPriorityClass(handle, IDLE_PRIORITY_CLASS);
+
+#endif
+#ifdef Q_OS_LINUX
+        // TODO
+        qWarning() << "Not setting process priority as not implemented on this OS";
+#endif
+
+#ifdef Q_OS_MACOS
+        // TODO
+        qWarning() << "Not setting process priority as not implemented on this OS";
+#endif
     });
 
     connect(m_encodeProcess, &QProcess::errorOccurred, this, [&](const QProcess::ProcessError error) {
@@ -82,14 +94,16 @@ void EncodeItemViewModel::startEncode()
         m_encodeProcess->deleteLater();
     });
 
+    QStringList args { "-i",
+                       m_path,
+                       //"-c", "copy",
+                       "-c:v", "libx265",
+                       "-b:a", "64k",
+                       m_path + "-enc.mp4",
+                       "-y"};
 
-    m_encodeProcess->start("ffmpeg", { "-i",
-                                       m_path,
-                                       //"-c", "copy",
-                                       "-c:v", "libx265",
-                                       "-b:a", "64k",
-                                       m_path + "-enc.mp4",
-                                       "-y"});
+    qWarning() << "About to start ffmpeg with args " << args.join(", ");
+    m_encodeProcess->start("ffmpeg", args);
 
     set_isEncoding(true);
 }
@@ -135,11 +149,14 @@ void EncodeItemViewModel::processFfmpegOutput(QString ffmpegOutput)
     }
 }
 
+#ifdef Q_OS_WIN
 typedef LONG (NTAPI *NtSuspendProcess)(IN HANDLE ProcessHandle);
+#endif
 
 void EncodeItemViewModel::pauseResumeEncoding()
 {
     // TODO Windows specific!
+#ifdef Q_OS_WIN
     Q_PID procInfo = m_encodeProcess->pid();
     qWarning() << "procInfo" << procInfo;
     //PROCESS_INFORMATION * processInfo = procId;
@@ -163,7 +180,9 @@ void EncodeItemViewModel::pauseResumeEncoding()
 
         set_isPaused(false);
     }
+#endif
 }
+
 
 Encoder::Encoder(QObject *parent) : QObject(parent)
 {
