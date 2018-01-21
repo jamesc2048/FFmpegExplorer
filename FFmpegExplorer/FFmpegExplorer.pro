@@ -5,7 +5,7 @@ QT += qml quick quickcontrols2 network sql concurrent
 VERSION = 0.1.0.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
-CONFIG += c++14 qtquickcompiler
+CONFIG += c++14
 #QMAKE_CXXFLAGS += -std=c++17
 
 SOURCES += main.cpp \
