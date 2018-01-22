@@ -34,7 +34,7 @@ ApplicationWindow {
         id: encoder
     }
 
-    Page {      
+    Page {
         id: root
         anchors.fill: parent
 

@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
     // Register type for model. Necessary to make Q_PROPERTY work inside Encoder class.
     qRegisterMetaType<QQmlObjectListModel<EncodeItemViewModel> *>("QQmlObjectListModel<EncodeItemViewModel> *");
-    // Weird issue where QProcess types ar enot registered.
+    // Weird issue where QProcess types are not registered with metatype system.
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
     qRegisterMetaType<QProcess::ProcessState>("QProcess::ProcessState");
 

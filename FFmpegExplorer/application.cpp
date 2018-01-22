@@ -1,6 +1,6 @@
 #include "application.h"
 
-Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
+Application::Application(int& argc, char **argv) : QGuiApplication(argc, argv)
 {
 //    qsu = QSimpleUpdater::getInstance();
 
@@ -11,14 +11,13 @@ Application::Application(int argc, char **argv) : QGuiApplication(argc, argv)
     findOrDownloadFfmpegBinary();
 
     examineFfmpeg();
-
-
 }
 
 bool Application::notify(QObject *receiver, QEvent *event)
 {
     try
     {
+        //qDebug() << "notify" << receiver << event;
         return QGuiApplication::notify(receiver, event);
     }
     catch (std::exception& e)
