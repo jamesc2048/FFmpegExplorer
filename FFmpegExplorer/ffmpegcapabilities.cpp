@@ -9,10 +9,10 @@ FfmpegCapabilities::FfmpegCapabilities(QObject *parent) : QObject(parent)
 
 void FfmpegCapabilities::analyseFfmpeg()
 {
-    QRegExp encoderRegex(R"(\s([\w\.]{6})\s(\w+)\s+(.+))"); // for -encoders
+    QRegExp encoderRegex(R"(\s([A-Z\.]{6})\s([a-z]+)\s+(\.+))"); // for -encoders
     QRegExp codecDetailsRegex(R"("\s{2}-([\w-]+)\s+<(\w+)>\s+([\w\.]{8})\s.+)"); // for -h encoder=libx264 for example
 
-    QString ffmpegOutput = Utilities::getCommandOutput("ffmpeg", { "-encoders" });
+    QString ffmpegOutput = Utilities::getCommandOutputSync("ffmpeg", { "-encoders" });
     qDebug() << ffmpegOutput;
 
     for (const auto &outLine : ffmpegOutput.split('\n'))
@@ -39,6 +39,9 @@ void FfmpegCapabilities::checkForFfmpegInstallation()
 
     if (ffmpegFilePath.isEmpty())
     {
+        qWarning("FFmpeg binary not found!");
+        // TODO
+        return;
         ffmpegFilePath = QStandardPaths::findExecutable("ffmpeg", { QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) });
     }
 
@@ -47,7 +50,7 @@ void FfmpegCapabilities::checkForFfmpegInstallation()
         QString path =
                 QDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)).filePath("ffmpeg.exe");
 
-        downloadFfmpeg(path);
+        //downloadFfmpeg(path);
     }
 
     QProcess ffmpegProcess;
@@ -63,27 +66,3 @@ void FfmpegCapabilities::checkForFfmpegInstallation()
     }
 }
 
-bool FfmpegCapabilities::downloadFfmpeg(QString pathToSave)
-{
-    QNetworkAccessManager nam;
-
-    QNetworkRequest req(QUrl("https://crisafulli.me/public/ffmpeg-3.4-win64-static/bin/ffmpeg.exe"));
-    QNetworkReply *reply = nam.get(req);
-
-    QEventLoop loop;
-    connect(&nam, &QNetworkAccessManager::finished, &loop,
-                [&](QNetworkReply *r) { loop.quit(); });
-
-    loop.exec();
-
-    QByteArray data = reply->readAll();
-    QFile f(pathToSave);
-    f.open(QIODevice::WriteOnly);
-
-    f.write(data);
-    f.close();
-
-    reply->deleteLater();
-
-    return true;
-}

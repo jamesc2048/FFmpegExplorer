@@ -39,7 +39,6 @@ public:
     explicit FfmpegCapabilities(QObject *parent = nullptr);
     void analyseFfmpeg();
     void checkForFfmpegInstallation();
-    bool downloadFfmpeg(QString path);
 
 signals:
 

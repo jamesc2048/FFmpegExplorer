@@ -9,7 +9,8 @@
 
 namespace Utilities
 {
-    QString getCommandOutput(const QString&, const QStringList&);
+    QString getCommandOutputSync(const QString&, const QStringList&);
+    void downloadFile(const QUrl, std::function<void(QNetworkReply *)>);
 }
 
 class QMLUtilities : public QObject

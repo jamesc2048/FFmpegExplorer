@@ -1,7 +1,7 @@
 #include "utilities.h"
 
 
-QString Utilities::getCommandOutput(const QString &exePath, const QStringList &args)
+QString Utilities::getCommandOutputSync(const QString &exePath, const QStringList &args)
 {
     QProcess p;
 
@@ -16,18 +16,15 @@ QString Utilities::getCommandOutput(const QString &exePath, const QStringList &a
     return {};
 }
 
-//QFuture<QString> Utilities::getCommandOutput(const QString &exePath, const QStringList &args)
-//{
-//    QProcess p;
+void Utilities::downloadFile(const QUrl url, std::function<void(QNetworkReply *)> callback)
+{
+    std::unique_ptr<QNetworkAccessManager> nam = std::make_unique<QNetworkAccessManager>();
 
-//    p.start(exePath, args);
+    QNetworkRequest req(url);
+    QNetworkReply *reply = nam->get(req);
 
-
-
-//    if (p.exitStatus() == QProcess::ExitStatus::NormalExit)
-//    {
-//        //return p.readAllStandardOutput();
-//    }
-
-//    return {};
-//}
+    QObject::connect(nam.get(), &QNetworkAccessManager::finished, [nam {std::move(nam)}, callback](QNetworkReply *reply)
+    {
+        callback(reply);
+    });
+}
