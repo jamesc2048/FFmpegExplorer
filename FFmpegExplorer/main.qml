@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: "Ffmpeg Explorer"
+    title: "FFmpeg Explorer"
 
     Component.onCompleted: {
         console.log("Application Window instantiated");

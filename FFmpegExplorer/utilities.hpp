@@ -48,6 +48,22 @@ public:
 //            ((QJSValue)(jsCallback)).call({ QJSValue("omg") });
        // });
     }
+
+    Q_INVOKABLE int getSystemOS()
+    {
+#ifdef Q_OS_WIN
+        return 0;
+#endif
+
+#ifdef Q_OS_LINUX
+        return 1;
+#endif
+
+#ifdef Q_OS_MACOS
+        return 2;
+#endif
+        return -1;
+    }
 };
 
 #endif // UTILITIES_H

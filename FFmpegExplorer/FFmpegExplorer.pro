@@ -1,9 +1,10 @@
 QT += qml quick quickcontrols2 network sql concurrent multimedia
 
-win32 {
-    message("Windows extras")
-    QT += winextras
-}
+# seems to apply to non windows configs too? bah.
+#win32 {
+#    message("Windows extras")
+#    QT += winextras
+#}
 
 VERSION = 0.1.0.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
