@@ -17,10 +17,11 @@
 #include <QtSql>
 #include <QtConcurrent>
 #include <QtMultimedia>
-#include <QtWinExtras/QtWinExtras>
 
 // Needs to be declared after QtWinExtras, for some reason?
 #ifdef _WIN32
+    #include <QtWinExtras/QtWinExtras>
+
     #define NOMINMAX
     #define WIN32_LEAN_AND_MEAN
     #include <Windows.h>
