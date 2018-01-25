@@ -40,7 +40,7 @@ ApplicationWindow {
 
         header: ToolBar {
             Label {
-                text: "Ffmpeg GUI"
+                text: "FFmpeg Explorer"
                 font.pixelSize: 20
                 anchors.centerIn: parent
             }
