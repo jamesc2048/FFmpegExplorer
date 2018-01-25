@@ -10,6 +10,8 @@ ListView {
 
     property var gridWidths: [100, 200, 100]
 
+    clip: true;
+
     header: null
     footer: null
 

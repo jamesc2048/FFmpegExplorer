@@ -60,7 +60,7 @@ ApplicationWindow {
                 ProgressBar {
                     from: 0
                     to: encoder.totalEncodeFiles
-                    value: encoder.encodeProgress
+                    value: encoder.currentEncodeFile
 
                     Layout.fillWidth: true
                 }
