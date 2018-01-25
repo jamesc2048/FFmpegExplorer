@@ -1,4 +1,4 @@
-#include "ffmpegcapabilities.h"
+#include "ffmpegcapabilities.hpp"
 
 FfmpegCapabilities::FfmpegCapabilities(QObject *parent) : QObject(parent)
 {

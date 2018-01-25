@@ -1,8 +1,8 @@
 #ifndef ENCODER_H
 #define ENCODER_H
 
-#include "pch.h"
-#include "qmlutils.h"
+#include "pch.hpp"
+#include "qmlutils.hpp"
 
 // Easier models by using QML tricks library.
 // https://github.com/Cavewhere/lib-qt-qml-tricks

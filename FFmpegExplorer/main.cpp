@@ -1,8 +1,8 @@
-#include "pch.h"
+#include "pch.hpp"
 
-#include "encoder.h"
-#include "application.h"
-#include "utilities.h"
+#include "encoder.hpp"
+#include "application.hpp"
+#include "utilities.hpp"
 
 void messageHandler(QtMsgType type, const QMessageLogContext &, const QString & msg)
 {

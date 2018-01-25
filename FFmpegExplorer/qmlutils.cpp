@@ -1,4 +1,4 @@
-#include "qmlutils.h"
+#include "qmlutils.hpp"
 
 /*!
     \class QQmlVariantListModel

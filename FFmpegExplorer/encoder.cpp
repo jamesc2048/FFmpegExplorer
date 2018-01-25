@@ -1,4 +1,4 @@
-#include "encoder.h"
+#include "encoder.hpp"
 
 
 EncodeItemViewModel::EncodeItemViewModel(QString path, QObject *parent) : QObject(parent)

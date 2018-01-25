@@ -17,7 +17,7 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-PRECOMPILED_HEADER = pch.h
+PRECOMPILED_HEADER =
 
 RC_ICONS = icon.ico
 
@@ -53,10 +53,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    encoder.h \
-    common.h \
-    qmlutils.h \
-    application.h \
-    ffmpegcapabilities.h \
-    utilities.h
+    pch.hpp \
+    ffmpegcapabilities.hpp \
+    encoder.hpp \
+    common.hpp \
+    application.hpp \
+    qmlutils.hpp \
+    utilities.hpp
 

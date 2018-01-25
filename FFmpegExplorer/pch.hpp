@@ -4,7 +4,7 @@
 #ifdef _WIN32
     #define NOMINMAX
     #define WIN32_LEAN_AND_MEAN
-    #include <windows.h>
+    #include <Windows.h>
 #endif
 
 // STD headers
@@ -25,6 +25,6 @@
 //#include <QtWinExtras>
 
 // Application headers
-#include "utilities.h"
+#include "utilities.hpp"
 
 #endif // PCH_H

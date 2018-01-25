@@ -1,8 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "pch.h"
-#include "ffmpegcapabilities.h"
+#include "pch.hpp"
+#include "ffmpegcapabilities.hpp"
 
 
 class Application : public QGuiApplication

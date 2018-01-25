@@ -1,4 +1,4 @@
-#include "utilities.h"
+#include "utilities.hpp"
 
 
 QString Utilities::getCommandOutputSync(const QString &exePath, const QStringList &args)

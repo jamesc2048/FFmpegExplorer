@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "pch.h"
+#include "pch.hpp"
 
 enum class AnalysisState
 {
