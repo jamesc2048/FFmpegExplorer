@@ -1,6 +1,9 @@
-QT += qml quick quickcontrols2 network sql concurrent
+QT += qml quick quickcontrols2 network sql concurrent multimedia
 
-# QT += winextras // not working?
+win32 {
+    message("Windows extras")
+    QT += winextras
+}
 
 VERSION = 0.1.0.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
@@ -17,16 +20,16 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-PRECOMPILED_HEADER =
+PRECOMPILED_HEADER = pch.h
 
 RC_ICONS = icon.ico
 
 CONFIG(debug, debug|release ) {
     # debug
-    # message("debug!")
+    message("debug!")
 } else {
     # release
-    # message("release!")
+    message("release!")
     CONFIG += qtquickcompiler
 }
 
