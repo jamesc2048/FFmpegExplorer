@@ -1,0 +1,16 @@
+sudo: required
+dist: xenial
+
+before_install:
+  - sudo apt update -qq
+  - sudo apt install build-essential -y
+
+install:
+  - wget -y http://3.crisafulli.me/Qt5.10.tar.xz
+  - sudo tar xf Qt5.10.tar.xz -C /opt/
+
+script:
+  - mkdir build
+  - cd build 
+  - /opt/Qt/5.10.0/gcc_64/bin/qmake ../FFmpegExplorer/FFmpegExplorer.pro
+  - make
