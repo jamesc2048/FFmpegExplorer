@@ -1,6 +1,8 @@
 sudo: required
 dist: xenial
 language: cpp
+os: linux
+group: stable
 
 before_install:
   - sudo apt update -qq
