@@ -21,7 +21,7 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-PRECOMPILED_HEADER = pch.h
+PRECOMPILED_HEADER = pch.hpp
 
 RC_ICONS = icon.ico
 
