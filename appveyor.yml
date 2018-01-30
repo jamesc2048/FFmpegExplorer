@@ -11,8 +11,8 @@ build_script:
     #- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
     - cd "FFmpegExplorer"
     - qmake FFmpegExplorer.pro
-    - nmake 
-    #- make
+    - mingw32-make
+    #- nmake
 
 after_build:
     - mkdir deploy
