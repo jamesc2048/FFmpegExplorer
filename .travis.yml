@@ -9,6 +9,7 @@ before_install:
   - sudo apt install build-essential -y
 
 install:
+  - sudo rm -rf /opt/Qt*
   - wget http://3.crisafulli.me/Qt5.10.tar.xz
   - sudo tar xf Qt5.10.tar.xz -C /opt/
 
