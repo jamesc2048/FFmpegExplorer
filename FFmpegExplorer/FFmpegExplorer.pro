@@ -57,7 +57,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    pch.hpp \
     ffmpegcapabilities.hpp \
     encoder.hpp \
     common.hpp \

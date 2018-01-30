@@ -21,7 +21,7 @@ void Utilities::downloadFile(const QUrl url, std::function<void(QNetworkReply *)
     std::unique_ptr<QNetworkAccessManager> nam = std::make_unique<QNetworkAccessManager>();
 
     QNetworkRequest req(url);
-    QNetworkReply *reply = nam->get(req);
+    nam->get(req);
 
     QObject::connect(nam.get(), &QNetworkAccessManager::finished, [nam {std::move(nam)}, callback](QNetworkReply *reply)
     {

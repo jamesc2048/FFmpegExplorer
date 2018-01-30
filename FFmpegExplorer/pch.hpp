@@ -22,9 +22,11 @@
 #ifdef _WIN32
     #include <QtWinExtras/QtWinExtras>
 
-    #define NOMINMAX
+    #ifndef NOMINMAX
+        #define NOMINMAX 1
+    #endif
     #define WIN32_LEAN_AND_MEAN
-    #include <Windows.h>
+    #include <windows.h>
 #endif
 
 // Application headers
