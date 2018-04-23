@@ -7,5 +7,6 @@
         <file>ListControl.qml</file>
         <file>ListControlDelegate.qml</file>
         <file>icon.ico</file>
+        <file>MediaSelectorForm.qml</file>
     </qresource>
 </RCC>

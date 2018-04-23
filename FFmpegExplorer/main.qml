@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQml 2.2
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
@@ -34,23 +34,41 @@ ApplicationWindow {
         id: encoder
     }
 
+    menuBar: MenuBar {
+        Menu {
+            title: "File"
+            Action { text: "Something" }
+            Action { text: "Something Else" }
+        }
+
+        Menu {
+            title: "Stuff"
+            Action { text: "Something" }
+            Action { text: "Something Else" }
+        }
+    }
+
     Page {
         id: root
         anchors.fill: parent
 
-        header: ToolBar {
-            Label {
-                text: "FFmpeg Explorer"
-                font.pixelSize: 20
-                anchors.centerIn: parent
-            }
-        }
+//        header: ToolBar {
+//            Label {
+//                text: "FFmpeg Explorer"
+//                font.pixelSize: 20
+//                anchors.centerIn: parent
+//            }
+//        }
 
-        CustomStackView {
-            id: stackView
-            anchors.fill: parent
+//        CustomStackView {
+//            id: stackView
+//            anchors.fill: parent
 
-            initialItem: ListControl {}
+//            initialItem: ListControl {}
+//        }
+
+        MediaSelectorForm {
+
         }
 
         footer: ColumnLayout {
