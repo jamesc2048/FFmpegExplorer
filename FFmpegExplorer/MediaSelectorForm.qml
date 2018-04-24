@@ -5,48 +5,56 @@ import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
 Page {
+    function addInOut(initialText, container) {
+        var c = Qt.createComponent("InOutFileSelection.qml")
+        var t = c.createObject(container, { isOutput: container === outputContainer})
+    }
+
     anchors.fill: parent
 
     ColumnLayout {
+        id: mainLayout
         width: parent.width
 
         GroupBox {
             title: "Inputs"
-            width: parent.width
-            contentWidth: width
+            Layout.fillWidth: true
 
             ColumnLayout {
-                width: parent.width
+                ColumnLayout {
+                    id: inputContainer
+                    width: parent.width
 
-                TextInput {
-                    text: "oy"
-
+                    InOutFileSelection {
+                        Layout.fillWidth: true
+                        isOutput: false
+                    }
                 }
 
                 Button {
                     text: "Add more inputs"
-                    onClicked: console.log("lol")
+                    onClicked: addInOut("Input", inputContainer)
                 }
             }
         }
 
         GroupBox {
             title: "Outputs"
-            width: parent.width
-            contentWidth: width
+            Layout.fillWidth: true
 
             ColumnLayout {
                 ColumnLayout {
-                    id: aaa
+                    id: outputContainer
 
-                    TextInput {
-                        text: "oy"
+                    InOutFileSelection {
+                        Layout.fillWidth: true
+                        isOutput: true
                     }
                 }
 
                 Button {
                     text: "Add more outputs"
-                    onClicked: { Qt.quit() }
+                    onClicked: addInOut("Output", outputContainer)
                 }
             }
         }

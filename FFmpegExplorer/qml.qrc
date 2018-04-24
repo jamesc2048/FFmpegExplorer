@@ -8,5 +8,6 @@
         <file>ListControlDelegate.qml</file>
         <file>icon.ico</file>
         <file>MediaSelectorForm.qml</file>
+        <file>InOutFileSelection.qml</file>
     </qresource>
 </RCC>

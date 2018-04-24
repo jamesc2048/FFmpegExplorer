@@ -62,6 +62,5 @@ HEADERS += \
     common.hpp \
     application.hpp \
     qmlutils.hpp \
-    utilities.hpp \
-    testmodel.h
+    utilities.hpp
 
