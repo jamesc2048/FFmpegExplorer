@@ -52,6 +52,21 @@ ApplicationWindow {
         id: root
         anchors.fill: parent
 
+        header: TabBar {
+            id: taskBar
+
+            width: parent.width
+            TabButton {
+                text: qsTr("Home")
+            }
+            TabButton {
+                text: qsTr("Discover")
+            }
+            TabButton {
+                text: qsTr("Activity")
+            }
+        }
+
 //        header: ToolBar {
 //            Label {
 //                text: "FFmpeg Explorer"
