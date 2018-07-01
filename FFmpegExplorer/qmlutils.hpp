@@ -17,6 +17,7 @@
             if ((ret = m_##name != name)) { \
                 m_##name = name; \
                 emit name##Changed (m_##name); \
+                emit propertyChanged(#name); \
             } \
             return ret; \
         } \

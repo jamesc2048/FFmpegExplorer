@@ -19,6 +19,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
+RC_ICONS = icon.ico
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
