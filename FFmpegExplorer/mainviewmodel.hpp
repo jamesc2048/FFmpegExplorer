@@ -132,13 +132,13 @@ public:
         set_input(new InputViewModel(this));
 
         connect(get_input(), &InputViewModel::propertyChanged, [this](QString pn) {
-           qDebug() << "property changed!" << pn << get_input()->property(pn.toLatin1());
+           qDebug() << "input property changed!" << pn << get_input()->property(pn.toLatin1());
         });
 
         set_output(new OutputViewModel(this));
 
         connect(get_output(), &OutputViewModel::propertyChanged, [this](QString pn) {
-           qDebug() << "property changed!" << pn << get_output()->property(pn.toLatin1());
+           qDebug() << "output property changed!" << pn << get_output()->property(pn.toLatin1());
         });
     }
 
