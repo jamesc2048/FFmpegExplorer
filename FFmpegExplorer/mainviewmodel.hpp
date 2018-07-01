@@ -12,8 +12,8 @@ class EncodeThread : public QThread
 {
     Q_OBJECT
 
-    QML_WRITABLE_PROPERTY(QString, args);
-    QML_WRITABLE_PROPERTY(QString, progress);
+    QString args;
+    QString progress;
 
     void run() override
     {
@@ -21,7 +21,7 @@ class EncodeThread : public QThread
 
         QProcess process;
 
-        QString finalCommand = (QStringList() << ffmpegPath << get_args()).join(" ");
+        QString finalCommand = (QStringList() << ffmpegPath << args).join(" ");
 
         qDebug() << "Final command" << finalCommand;
 
@@ -30,8 +30,11 @@ class EncodeThread : public QThread
 
         if (process.waitForStarted())
         {
+            emit started();
+
             while (process.state() == QProcess::Running)
             {
+                // TODO read standard output to get progress
                 process.waitForReadyRead();
                 qDebug() << "StdError" << process.readAllStandardError();
                 qDebug() << "StdOutput" << process.readAllStandardError();
@@ -43,6 +46,8 @@ class EncodeThread : public QThread
         {
             qDebug() << "Process did not start:" << process.error();
         }
+
+        emit finished();
     }
 
 public:
@@ -51,9 +56,15 @@ public:
 
     }
 
+    void setArgs(QString argsStr)
+    {
+        args = argsStr;
+    };
+
     signals:
-        void propertyChanged(QString propertyName);
-        void resultReady(const QString &s);
+        void progressChanged(double progress);
+        void started();
+        void finished();
 };
 
 class InputViewModel : public QObject
@@ -164,13 +175,18 @@ public:
         qDebug() << "Final args:" << args;
 
         EncodeThread *encodeThread = new EncodeThread(this);
-        encodeThread->set_args(args.join(" "));
+        encodeThread->setArgs(args.join(" "));
         encodeThread->start();
+
+        connect(encodeThread, &EncodeThread::finished, [this]() {
+            emit encodeFinished();
+        });
 
         return true;
     }
 
 signals:
+    void encodeFinished();
     void propertyChanged(QString propertyName);
 
 public slots:

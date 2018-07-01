@@ -10,6 +10,26 @@ ApplicationWindow {
     height: 480
     title: "FFmpeg Explorer"
 
+    Component.onCompleted: {
+        // constructor, kind of
+        viewModel.encodeFinished.connect(function()
+        {
+            console.log("encode finished!")
+            messageDialog.visible = true;
+        })
+    }
+
+    MessageDialog {
+        id: messageDialog
+
+        icon: StandardIcon.Information
+        title: "Encode Completed"
+        text: "Encode completed successfully!"
+        onAccepted: {
+
+        }
+    }
+
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
