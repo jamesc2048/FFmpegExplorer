@@ -15,7 +15,7 @@ ApplicationWindow {
         viewModel.encodeFinished.connect(function()
         {
             console.log("encode finished!")
-            messageDialog.visible = true;
+            messageDialog.open()
         })
     }
 
