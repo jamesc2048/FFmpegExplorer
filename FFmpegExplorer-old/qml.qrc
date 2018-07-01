@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>CustomStackView.qml</file>
+        <file>DetailsControl.qml</file>
+        <file>ListControl.qml</file>
+        <file>ListControlDelegate.qml</file>
+        <file>icon.ico</file>
+        <file>MediaSelectorForm.qml</file>
+        <file>InOutFileSelection.qml</file>
+    </qresource>
+</RCC>
