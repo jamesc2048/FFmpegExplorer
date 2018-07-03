@@ -67,7 +67,34 @@ public:
         void finished();
 };
 
-class InputViewModel : public QObject
+class ViewModelBase : public QObject
+{
+    Q_OBJECT
+
+public:
+    ViewModelBase(QObject *parent = nullptr) : QObject(parent)
+    {
+
+    }
+
+    virtual bool event(QEvent *event) override
+    {
+        if (event->type() == QEvent::DynamicPropertyChange)
+        {
+            QDynamicPropertyChangeEvent *const propEvent = static_cast<QDynamicPropertyChangeEvent*>(event);
+            QString propName = propEvent->propertyName();
+            emit propertyChanged(propName);
+            return true;
+        }
+
+        return false;
+    }
+
+signals:
+    void propertyChanged(QString propertyName);
+};
+
+class InputViewModel : public ViewModelBase
 {
     Q_OBJECT
 
@@ -76,7 +103,7 @@ class InputViewModel : public QObject
     QML_WRITABLE_PROPERTY(QString, duration)
 
 public:
-    InputViewModel(QObject *parent = nullptr) : QObject(parent)
+    InputViewModel(QObject *parent = nullptr) : ViewModelBase(parent)
     {
     }
 
@@ -98,19 +125,16 @@ public:
 
         return opts;
     }
-
-signals:
-    void propertyChanged(QString propertyName);
 };
 
-class OutputViewModel : public QObject
+class OutputViewModel : public ViewModelBase
 {
     Q_OBJECT
 
     QML_WRITABLE_PROPERTY(QString, outputUrl)
 
 public:
-    OutputViewModel(QObject *parent = nullptr) : QObject(parent)
+    OutputViewModel(QObject *parent = nullptr) : ViewModelBase(parent)
     {
     }
 
@@ -122,11 +146,10 @@ public:
 
         return opts;
     }
-signals:
-    void propertyChanged(QString propertyName);
+
 };
 
-class MainViewModel : public QObject
+class MainViewModel : public ViewModelBase
 {
     Q_OBJECT
 
@@ -138,7 +161,7 @@ class MainViewModel : public QObject
     std::unique_ptr<QProcess> ffmpegProcess;
 
 public:
-    explicit MainViewModel(QObject *parent = nullptr) : QObject(parent)
+    explicit MainViewModel(QObject *parent = nullptr) : ViewModelBase(parent)
     {
         set_input(new InputViewModel(this));
 
@@ -187,7 +210,6 @@ public:
 
 signals:
     void encodeFinished();
-    void propertyChanged(QString propertyName);
 
 public slots:
 };
