@@ -84,10 +84,11 @@ public:
             QDynamicPropertyChangeEvent *const propEvent = static_cast<QDynamicPropertyChangeEvent*>(event);
             QString propName = propEvent->propertyName();
             emit propertyChanged(propName);
+
             return true;
         }
 
-        return false;
+        return QObject::event(event);
     }
 
 signals:
