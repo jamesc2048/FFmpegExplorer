@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>EncodeView.qml</file>
+        <file>SetupView.qml</file>
     </qresource>
 </RCC>

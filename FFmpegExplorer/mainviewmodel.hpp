@@ -157,6 +157,7 @@ class MainViewModel : public ViewModelBase
     QML_WRITABLE_PROPERTY(InputViewModel *, input)
     QML_WRITABLE_PROPERTY(OutputViewModel *, output)
 
+    // 0 to 100
     QML_READONLY_PROPERTY(double, encodeProgress)
 
     std::unique_ptr<QProcess> ffmpegProcess;
@@ -185,6 +186,7 @@ public:
     Q_INVOKABLE bool startEncode()
     {
         qDebug() << "Start Encode!!";
+        emit encodeStarting();
 
         QStringList inputArgs = get_input()->getFFmpegInputOpts();
         QStringList outputArgs = get_output()->getFFmpegOutputOpts();
@@ -210,6 +212,7 @@ public:
     }
 
 signals:
+    void encodeStarting();
     void encodeFinished();
 
 public slots:
