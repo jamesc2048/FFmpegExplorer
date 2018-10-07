@@ -16,7 +16,9 @@
             bool ret = false; \
             if ((ret = m_##name != name)) { \
                 m_##name = name; \
+                /* Trigger Qt binding update */ \
                 emit name##Changed (m_##name); \
+                /* Trigger ViewModelBase event */ \
                 emit propertyChanged(#name); \
             } \
             return ret; \

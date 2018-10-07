@@ -1,5 +1,10 @@
 QT += quick
-CONFIG += c++14
+CONFIG += c++17
+
+# If GCC:
+#QMAKE_CXXFLAGS += -std=c++17
+# If MSVC:
+QMAKE_CXXFLAGS += /std:c++17
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -15,11 +20,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     mainviewmodel.cpp \
-    qmlutils.cpp
+    qmlutils.cpp \
+    viewmodelbase.cpp \
+    encodeitemviewmodel.cpp \
+    encodeviewmodel.cpp
 
 RESOURCES += qml.qrc
-
-RC_ICONS = icon.ico
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -34,4 +40,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     mainviewmodel.hpp \
-    qmlutils.hpp
+    qmlutils.hpp \
+    viewmodelbase.hpp \
+    encodeitemviewmodel.hpp \
+    encodeviewmodel.hpp

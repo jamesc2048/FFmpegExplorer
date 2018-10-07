@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>HomeForm.ui.qml</file>
+        <file>Page1Form.ui.qml</file>
+        <file>Page2Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>EncodeView.qml</file>
-        <file>SetupView.qml</file>
     </qresource>
 </RCC>
