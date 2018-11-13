@@ -1,0 +1,32 @@
+GUI:
+
+Add Input file
+Once file is added, one can click "customise input file". Per-input file options are revealed (stream seek etc)
+There is a "preview" window for this to help choose crop, duration etc
+Options are sorted by "commonness" (stream seek duration first, crop, less common options...
+
+Add Output file
+Once file is added, one can click "customise output file". Per-output file options are revealed (codec, stream seek etc)
+Options are sorted by "commonness" (stream seek duration first, crop, less common options...
+
+Add Video filter from dropdown. Only allowed filters are in dropdown. Maybe disallowed are greyed out.
+Choose video filter.
+Verify compatibility of filter (audio, video, data etc)
+A preview of the filter's effects is done (maybe? do short encode in background? single frame?)
+
+In simple mode, only one input and output can be chosen. Only simple filters can be chosen, but allow chaining.
+Pipeline is strictly input -> filters ... -> output
+In complex mode, multiple input-output can be chosen. Complex filter gets validated for number of inputs (e.g. hstack=inputs=n_inputs)
+For each complex filter entry, if it takes an input, a corresponding input can be chosen. A previous filter output can be used as an input.
+Something like:
+Input/inputs (dropdown? maybe "add input" button?) -> filter (filter autoadjusted for n inputs) -> outputs
+Outputs can be labels (then can be fed into other filters) Maybe call "Filter chain#1" etc? "Filter input #1"?
+Or, outputs can be output video files, selected above.
+Maybe... Consider "graph" drawing such as Blender shader graph, but with filters.
+
+Maybe make an exception for simple "complex" scenarios like hstack, crop, etc? Those are useful outside of complex mode.
+
+Once one has decided the pipeline, one can save this operation as a "Preset". Maybe provide premade presets for common ops?
+Then, one can use the preset to batch encode. Select files, folder, enqueue, encode...
+Also provide way to do one off stuff. Maybe enqueue anyway, so one can do many one-offs at once.
+How to do batch encoding of complex filters? Maybe rely on naming convention? txt file list?
