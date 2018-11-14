@@ -6,7 +6,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Stack")
+    title: "FFMpeg Explorer"
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -25,8 +25,9 @@ ApplicationWindow {
         }
 
         Label {
-            text: stackView.currentItem.title
+            text: window.title
             anchors.centerIn: parent
+            font.pixelSize: 18
         }
     }
 
@@ -59,7 +60,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: "InputPage.qml"
         anchors.fill: parent
     }
 }
