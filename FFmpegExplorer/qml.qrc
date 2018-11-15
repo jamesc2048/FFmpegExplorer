@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>InputPage.qml</file>
+        <file>DetailsPage.qml</file>
     </qresource>
 </RCC>

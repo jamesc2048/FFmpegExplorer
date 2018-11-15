@@ -1,5 +1,6 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 ApplicationWindow {
     id: window
@@ -60,7 +61,14 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "InputPage.qml"
         anchors.fill: parent
+
+        initialItem: InputPage {
+            onDetailsPageClicked: {
+                var c = Qt.createComponent("DetailsPage.qml")
+
+                stackView.push(c.createObject(stackView, { model: modelParams }))
+            }
+        }
     }
 }

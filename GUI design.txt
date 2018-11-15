@@ -1,8 +1,8 @@
 GUI:
 
 Add Input file
-Once file is added, one can click "customise input file". Per-input file options are revealed (stream seek etc)
-There is a "preview" window for this to help choose crop, duration etc
+Once file is added, one can click "customise input file"/"details". Per-input file options are revealed (stream seek etc)
+There is a "preview" window for this to help choose crop, duration etc. Maybe appears after option is selected.
 Options are sorted by "commonness" (stream seek duration first, crop, less common options...
 
 Add Output file
