@@ -13,7 +13,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    viewmodelbase.cpp \
+    mainviewmodel.cpp \
+    qmlutils.cpp \
+    inputviewmodel.cpp \
+    outputviewmodel.cpp \
+    inputfileviewmodel.cpp \
+    outputfileviewmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -27,3 +34,12 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    mainviewmodel.hpp \
+    viewmodelbase.hpp \
+    qmlutils.hpp \
+    inputviewmodel.hpp \
+    outputviewmodel.hpp \
+    inputfileviewmodel.hpp \
+    outputfileviewmodel.hpp

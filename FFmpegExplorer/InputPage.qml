@@ -1,22 +1,51 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Dialogs 1.3
 
 Page {
     signal detailsPageClicked(var modelParams)
 
     id: inputPage
 
-    ListModel {
-        id: inputListModel
+//    ListModel {
+//        id: inputListModel
 
-        function getNewModel() {
-            return {
-                filePath: "",
-                startTrim: 0,
-                endTrim: 0,
-                duration: 0
-            }
+//        function getNewModel() {
+//            return {
+//                filePath: "",
+//                startTrim: 0,
+//                endTrim: 0,
+//                duration: 0
+//            }
+//        }
+//    }
+
+    FileDialog {
+        id: directoryDialog
+        title: "Choose a directory"
+        modality: Qt.WindowModal
+        selectFolder: true
+        folder: "2"
+
+        onAccepted: {
+            console.log("You chose: " + directoryDialog.folder)
+        }
+
+        onRejected: {
+            console.log("Canceled")
+        }
+    }
+
+    MessageDialog {
+        id: messageDialog
+
+        icon: StandardIcon.Information
+        title: "Encode Completed"
+        text: "Encode completed successfully!"
+
+        onAccepted: {
+
         }
     }
 
@@ -41,12 +70,13 @@ Page {
 
                 Text {
                     Layout.fillWidth: true
-                    text: model.filePath
+                    text: model.isValid ? filePath : "Not a video file!"
+                    color: model.isValid ? "black" : "red"
                 }
 
                 Text {
                     Layout.fillWidth: true
-                    text: model.startTime
+                    text: model.duration
                 }
 
                 Button {
@@ -57,7 +87,7 @@ Page {
 
                 Button {
                     text: "Remove"
-                    onClicked: inputListModel.remove(index)
+                    onClicked: viewModel.inputViewModel.inputFiles.remove(index)
                 }
             }
 
@@ -100,7 +130,7 @@ Page {
             id: inputListView
             //highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
             focus: true
-            model: inputListModel
+            model: viewModel.inputViewModel.inputFiles
 
             Layout.fillWidth: true
             Layout.preferredHeight: childrenRect.height
@@ -108,11 +138,11 @@ Page {
 
             delegate: inputListDelegate
 
-            visible: inputListModel.count > 0
+            visible: viewModel.inputViewModel.inputFiles.count > 0
         }
 
         Text {
-            visible: inputListModel.count == 0
+            visible: viewModel.inputViewModel.inputFiles.count == 0
             text: "Add input to begin"
             Layout.alignment: Qt.AlignCenter
             padding: 5
@@ -122,16 +152,29 @@ Page {
             text: "Add Input"
             Layout.alignment: Qt.AlignLeft
 
-            onClicked: {
-                var model = inputListModel.getNewModel()
-                model.filePath = new Date().toString()
-                model.startTime = 20
-                model.endTime = 50
+            onClicked: fileDialog.open()
 
-                inputListModel.append(model)
+            FileDialog {
+                id: fileDialog
+                title: "Choose a file"
+                modality: Qt.WindowModal
+                selectMultiple: false
 
-                console.log(JSON.stringify(inputListModel))
+                onAccepted: {
+                    console.log("You chose: " + fileDialog.fileUrl)
+
+                    // TODO eliminating this might make it troublesome to pass URLs?
+                    var url = fileDialog.fileUrl.toString().replace("file:///", "");
+                    viewModel.inputViewModel.addNewInputFile(url)
+                }
+
+                onRejected: {
+                    console.log("Canceled")
+                }
             }
         }
     }
 }
+
+
+

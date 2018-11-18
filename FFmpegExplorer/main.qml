@@ -7,7 +7,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: "FFMpeg Explorer"
+    title: "FFmpeg Explorer"
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -44,7 +44,6 @@ ApplicationWindow {
                 text: qsTr("Page 1")
                 width: parent.width
                 onClicked: {
-                    //stackView.push("Page1Form.ui.qml")
                     drawer.close()
                 }
             }
@@ -52,7 +51,6 @@ ApplicationWindow {
                 text: qsTr("Page 2")
                 width: parent.width
                 onClicked: {
-                    //stackView.push("Page2Form.ui.qml")
                     drawer.close()
                 }
             }
