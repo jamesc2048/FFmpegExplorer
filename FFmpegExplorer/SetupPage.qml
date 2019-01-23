@@ -34,7 +34,7 @@ ScrollView {
                     Layout.alignment: Qt.AlignRight
                     text: "X"
 
-                    onClicked: model.modelData.remove(index)
+                    onClicked: model.remove(index)
                 }
             }
         }
