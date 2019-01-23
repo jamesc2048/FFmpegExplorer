@@ -61,12 +61,12 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
 
-        initialItem: InputPage {
-            onDetailsPageClicked: {
-                var c = Qt.createComponent("DetailsPage.qml")
+        initialItem: SetupPage {
+//            onDetailsPageClicked: {
+//                var c = Qt.createComponent("DetailsPage.qml")
 
-                stackView.push(c.createObject(stackView, { model: modelParams }))
-            }
+//                stackView.push(c.createObject(stackView, { model: modelParams }))
+//            }
         }
     }
 }
