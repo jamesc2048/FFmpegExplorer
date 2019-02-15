@@ -43,3 +43,6 @@ HEADERS += \
     outputviewmodel.hpp \
     inputfileviewmodel.hpp \
     outputfileviewmodel.hpp
+
+DISTFILES += \
+    TODOs.txt
