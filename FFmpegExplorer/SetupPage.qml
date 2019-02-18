@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 
 
 ScrollView {
+    clip: true
     height: parent.height
     contentWidth: parent.width
 
@@ -13,67 +14,29 @@ ScrollView {
     Component {
         id: listDelegate
 
-        Rectangle {
-            height: 50
+        RowLayout {
+            height: 40
             width: parent.width
 
-            border.width: 1
-            border.color: "black"
+            Text {
+                Layout.margins: 5
+                Layout.alignment: Qt.AlignLeft
+                text: filePath
+            }
 
-            color: index % 2 ? "#eee" : "white"
+            Button {
+                Layout.margins: 5
+                Layout.alignment: Qt.AlignRight
+                text: "X"
 
-            RowLayout {
-                anchors.fill: parent
-
-                Text {
-                    Layout.alignment: Qt.AlignLeft
-                    text: model.modelData
-                }
-
-                Button {
-                    Layout.alignment: Qt.AlignRight
-                    text: "X"
-
-                    onClicked: model.remove(index)
-                }
+                // change to viewmodel call
+                onClicked: viewModel.inputViewModel.inputFiles.remove(index)
             }
         }
     }
 
-    ListModel {
-        id: inputModel
-
-        ListElement {
-            fileName: "Test 1"
-        }
-
-        ListElement {
-            fileName: "Test 2"
-        }
-
-        ListElement {
-            fileName: "Test 3"
-        }
-    }
-
-    ListModel {
-        id: outputModel
-
-        ListElement {
-            fileName: "Test 1"
-        }
-
-        ListElement {
-            fileName: "Test 2"
-        }
-
-        ListElement {
-            fileName: "Test 3"
-        }
-    }
-
     ColumnLayout {
-        width: parent.width
+        anchors.fill: parent
 
         Label {
             Layout.alignment: Qt.AlignCenter
@@ -86,15 +49,15 @@ ScrollView {
             Layout.fillWidth: true
             Layout.preferredHeight: childrenRect.height
 
-            spacing: 5
+            spacing: 2
 
-            model: inputModel
+            model: viewModel.inputViewModel.inputFiles
             delegate: listDelegate
         }
 
         Button {
             text: "Add Input"
-            onClicked: inputModel.append({ fileName: new Date().toString() })
+            onClicked: viewModel.inputViewModel.inputModel.append({ fileName: new Date().toString() })
         }
 
         Label {
@@ -108,9 +71,9 @@ ScrollView {
             Layout.fillWidth: true
             Layout.preferredHeight: childrenRect.height
 
-            spacing: 5
+            spacing: 2
 
-            model: outputModel
+//            model: outputModel
             delegate: listDelegate
         }
 

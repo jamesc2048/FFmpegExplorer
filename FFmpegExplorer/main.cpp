@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QProcess>
 
-#include "mainViewModel.hpp"
+#include "mainviewmodel.hpp"
 
 int main(int argc, char *argv[])
 {

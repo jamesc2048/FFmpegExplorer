@@ -2,7 +2,7 @@
 
 InputFileViewModel::InputFileViewModel(QObject *parent) : ViewModelBase(parent)
 {
-    //set_filePath("wowowow");
+    set_filePath("wowowow");
     set_duration(55.6);
     set_startTrim(3.33);
     set_endTrim(6.66);

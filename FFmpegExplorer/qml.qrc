@@ -5,5 +5,6 @@
         <file>InputPage_old.qml</file>
         <file>DetailsPage.qml</file>
         <file>SetupPage.qml</file>
+        <file>EncodeQueuePage.qml</file>
     </qresource>
 </RCC>
