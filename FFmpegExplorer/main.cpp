@@ -3,10 +3,12 @@
 #include <QQmlContext>
 
 #include "mainviewmodel.hpp"
+#include "inputfileviewmodel.hpp"
+
 
 int main(int argc, char *argv[])
 {
-    //qRegisterMetaType<QQmlObjectListModel<InputFileViewModel> *>("QQmlObjectListModel<InputFileViewModel> *");
+    qRegisterMetaType<QQmlObjectListModel<InputFileViewModel> *>("QQmlObjectListModel<InputFileViewModel> *");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
