@@ -1,13 +1,11 @@
-#ifndef MAINVIEWMODEL_HPP
-#define MAINVIEWMODEL_HPP
+#ifndef MAINVIEWMODEL_H
+#define MAINVIEWMODEL_H
 
 #include <QObject>
 
 #include "viewmodelbase.hpp"
-
 #include "inputviewmodel.hpp"
 #include "outputviewmodel.hpp"
-#include "filterviewmodel.hpp"
 
 class MainViewModel : public ViewModelBase
 {
@@ -15,12 +13,10 @@ class MainViewModel : public ViewModelBase
 
     QML_READONLY_PROPERTY(InputViewModel *, inputViewModel)
     QML_READONLY_PROPERTY(OutputViewModel *, outputViewModel)
-    QML_READONLY_PROPERTY(FilterViewModel *, filterViewModel)
 
 public:
-    explicit MainViewModel(QObject *parent = nullptr);
-
-
+    MainViewModel(QObject *parent = nullptr);
+    ~MainViewModel();
 };
 
-#endif // MAINVIEWMODEL_HPP
+#endif // MAINVIEWMODEL_H

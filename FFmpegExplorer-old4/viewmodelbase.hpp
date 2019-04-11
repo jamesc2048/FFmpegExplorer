@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "qmlutils.hpp"
+#include <qmlutils.hpp>
 
 class ViewModelBase : public QObject
 {

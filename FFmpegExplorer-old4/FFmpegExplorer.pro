@@ -1,5 +1,5 @@
-QT += quick
-CONFIG += c++11
+QT += quick multimedia
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -13,14 +13,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        filterviewmodel.cpp \
-        inputfileviewmodel.cpp \
-        inputviewmodel.cpp \
         main.cpp \
-        mainviewmodel.cpp \
-        outputviewmodel.cpp \
-        qmlutils.cpp \
-        viewmodelbase.cpp
+    viewmodelbase.cpp \
+    mainviewmodel.cpp \
+    qmlutils.cpp \
+    inputviewmodel.cpp \
+    outputviewmodel.cpp \
+    inputfileviewmodel.cpp \
+    outputfileviewmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,10 +36,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    filterviewmodel.hpp \
-    inputfileviewmodel.hpp \
-    inputviewmodel.hpp \
     mainviewmodel.hpp \
-    outputviewmodel.hpp \
+    viewmodelbase.hpp \
     qmlutils.hpp \
-    viewmodelbase.hpp
+    inputviewmodel.hpp \
+    outputviewmodel.hpp \
+    inputfileviewmodel.hpp \
+    outputfileviewmodel.hpp
+
+DISTFILES += \
+    TODOs.txt
