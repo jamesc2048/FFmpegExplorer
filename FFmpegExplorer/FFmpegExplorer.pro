@@ -1,5 +1,5 @@
-QT += quick
-CONFIG += c++11
+QT += quick concurrent network
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -20,6 +20,7 @@ SOURCES += \
         mainviewmodel.cpp \
         outputviewmodel.cpp \
         qmlutils.cpp \
+        utilities.cpp \
         viewmodelbase.cpp
 
 RESOURCES += qml.qrc
@@ -42,4 +43,5 @@ HEADERS += \
     mainviewmodel.hpp \
     outputviewmodel.hpp \
     qmlutils.hpp \
+    utilities.hpp \
     viewmodelbase.hpp

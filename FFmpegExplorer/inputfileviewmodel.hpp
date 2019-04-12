@@ -2,6 +2,9 @@
 #define INPUTFILEVIEWMODEL_HPP
 
 #include <QObject>
+#include <QTimer>
+#include <QProcess>
+#include <QtConcurrent>
 
 #include "viewmodelbase.hpp"
 
@@ -10,7 +13,8 @@ class InputFileViewModel : public ViewModelBase
     Q_OBJECT
 
     QML_READONLY_PROPERTY(QString, filePath)
-    QML_READONLY_PROPERTY(bool, isValid)
+    QML_READONLY_PROPERTY(bool, hasAnalysed)
+    QML_READONLY_PROPERTY(bool, isCorrupt)
 
     // In seconds
     QML_READONLY_PROPERTY(qreal, duration)
@@ -20,6 +24,7 @@ class InputFileViewModel : public ViewModelBase
 public:
     explicit InputFileViewModel(QObject *parent = nullptr);
 
+    void analyse();
 signals:
 
 public slots:

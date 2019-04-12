@@ -5,6 +5,7 @@
 #include "mainviewmodel.hpp"
 #include "inputfileviewmodel.hpp"
 
+#include "utilities.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +28,10 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
     MainViewModel viewModel;
+    Utilities utilities;
+
     engine.rootContext()->setContextProperty("viewModel", &viewModel);
+    engine.rootContext()->setContextProperty("utilities", &utilities);
 
     engine.load(url);
 

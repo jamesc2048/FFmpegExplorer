@@ -12,13 +12,13 @@ class InputViewModel : public ViewModelBase
     Q_OBJECT
 
     QML_READONLY_PROPERTY(QQmlObjectListModel<InputFileViewModel> *, inputFiles)
+    QML_WRITABLE_PROPERTY(InputFileViewModel *, selectedInputFile)
 
 public:
     explicit InputViewModel(QObject *parent = nullptr);
 
-signals:
+    Q_INVOKABLE void addInputUrls(QList<QUrl> urls);
 
-public slots:
 };
 
 #endif // INPUTVIEWMODEL_HPP
