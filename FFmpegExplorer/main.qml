@@ -17,102 +17,150 @@ Window {
         utilities.httpGet("http://3.crisafulli.me/")
     }
 
-    StackView {
-        id: stackView
-        width: parent.width
+    ScrollView {
+        anchors.fill: parent
 
-        initialItem: mainView
+        StackView {
+            id: stackView
+            width: parent.width
 
-        Component {
-            id: mainView
+            initialItem: mainView
 
-            ColumnLayout {
-                width: parent.width
+            Component {
+                id: mainView
 
-                Text {
-                    text: "Input Files"
-                }
+                ColumnLayout {
+                    width: parent.width
 
-                ListView {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: contentHeight
+                    Text {
+                        text: "Input Files"
+                    }
 
-                    clip: true
-                    model: viewModel.inputViewModel.inputFiles
+                    ListView {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: contentHeight
 
-                    delegate: RowLayout {
-                        width: parent.width
-                        height: 50
+                        clip: true
+                        model: viewModel.inputViewModel.inputFiles
 
-                        Text {
-                            Layout.fillWidth: true
-                            text: (filePath == "" ? "(No Path)" : filePath) + " Duration: " + duration
-                            verticalAlignment: Qt.AlignVCenter
-                        }
+                        delegate: RowLayout {
+                            width: parent.width
+                            height: 50
 
-                        Button {
-                            height: 30
+                            Text {
+                                Layout.fillWidth: true
+                                text: (filePath == "" ? "(No Path)" : filePath) + " Duration: " + formatInfo["duration"]
+                                verticalAlignment: Qt.AlignVCenter
+                            }
 
-                            text: "Details"
-                            onClicked: {
-                                viewModel.inputViewModel.selectedInputFile =
-                                        viewModel.inputViewModel.inputFiles.get(index)
+                            Button {
+                                height: 30
 
-                                stackView.push(detailsView)
+                                text: "Details"
+                                onClicked: {
+                                    viewModel.inputViewModel.selectedInputFile =
+                                            viewModel.inputViewModel.inputFiles.get(index)
+
+                                    stackView.push(detailsView)
+                                }
+                            }
+
+                            Button {
+                                height: 30
+
+                                text: "Remove"
+                                onClicked: viewModel.inputViewModel.inputFiles.remove(index)
                             }
                         }
-
-                        Button {
-                            height: 30
-
-                            text: "Remove"
-                            onClicked: viewModel.inputViewModel.inputFiles.remove(index)
-                        }
                     }
-                }
 
-                Button {
-                    text: "Add Input File"
+                    Button {
+                        text: "Add Input File"
 
-                    onClicked: {
-                        var c = Qt.createComponent("fileDialog.qml");
+                        onClicked: {
+                            var c = Qt.createComponent("fileDialog.qml");
 
-                        c.createObject(window, {
-                           successCallback: function(urls) {
-                               console.log("FileDialog:", urls);
+                            c.createObject(window, {
+                               successCallback: function(urls) {
+                                   console.log("FileDialog:", urls);
 
-                               viewModel.inputViewModel.addInputUrls(urls)
-                           }
-                        })
+                                   viewModel.inputViewModel.addInputUrls(urls)
+                               }
+                            })
+                        }
                     }
                 }
             }
-        }
 
-        Component {
-            id: detailsView
+            Component {
+                id: detailsView
 
-            ColumnLayout {
-                Text {
-                    text: {
-                        var selected = viewModel.inputViewModel.selectedInputFile;
-
-                        if (selected) {
-                            return selected.duration
-                        }
-
-                        return "No selected";
+                ColumnLayout {
+                    Text {
+                        text: "Format Info"
+                        font.bold: true
                     }
-                }
 
-                Text {
-                    text: viewModel.inputViewModel.selectedInputFile.filePath
-                }
+                    Text {
+                        text: {
+                            var selected = viewModel.inputViewModel.selectedInputFile;
 
-                Button {
-                    text: "Back"
+                            if (selected) {
+                                var text = "";
 
-                    onClicked: stackView.pop()
+                                for (var key in selected.formatInfo) {
+                                    var val = selected.formatInfo[key];
+
+                                    // Ignore "disposition" keys and so on for now
+                                    if (typeof val != "object") {
+                                        text += key + ": " + val + "\n";
+                                    }
+                                }
+
+                                return text;
+                            }
+
+                            return "No selected";
+                        }
+                    }
+
+                    Text {
+                        text: "Streams Info"
+                        font.bold: true
+                    }
+
+                    Text {
+                        text: {
+                            var selected = viewModel.inputViewModel.selectedInputFile;
+
+                            if (selected) {
+                                var text = "";
+
+                                for (var i = 0; i < selected.streamsInfo.length; i++) {
+                                    var stream = selected.streamsInfo[i];
+
+                                    for (var key in stream) {
+                                        var val = stream[key]
+
+                                        // Ignore "disposition" keys and so on for now
+                                        if (typeof val != "object") {
+                                            text += key + ": " + val + "\n";
+                                        }
+                                    }
+                                }
+
+                                return text;
+                            }
+
+                            return "No selected";
+                        }
+                    }
+
+                    Button {
+                        text: "Back"
+
+                        onClicked: stackView.pop()
+                    }
                 }
             }
         }

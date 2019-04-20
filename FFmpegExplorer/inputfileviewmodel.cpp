@@ -54,20 +54,31 @@ void InputFileViewModel::analyse()
 
             qDebug() << obj["format"];
 
-            obj = obj["format"].toObject();
-            QJsonValue val = obj["duration"];
+            QJsonObject formatObj = obj["format"].toObject();
+            QJsonArray streamArr = obj["streams"].toArray();
 
-            set_duration(val.toString().toDouble());
+            QVariantMap qm = formatObj.toVariantMap();
 
-            qDebug() << val;
+            QVariantList ql;
+
+            foreach (QJsonValue stream, streamArr)
+            {
+                ql.append(stream.toObject().toVariantMap());
+            }
+
+            qDebug() << ql << qm;
+
+            set_streamsInfo(ql);
+            set_formatInfo(qm);
 
             set_hasAnalysed(true);
-            set_isCorrupt(false);
+            set_isCorrupt(!get_hasAnalysed());
+
         }
         else
         {
             set_hasAnalysed(false);
-            set_isCorrupt(true);
+            set_isCorrupt(!get_hasAnalysed());
         }
     });
 }

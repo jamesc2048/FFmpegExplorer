@@ -21,6 +21,9 @@ class InputFileViewModel : public ViewModelBase
     QML_READONLY_PROPERTY(qreal, startTrim)
     QML_READONLY_PROPERTY(qreal, endTrim)
 
+    QML_READONLY_PROPERTY(QVariantMap, formatInfo)
+    QML_READONLY_PROPERTY(QVariantList, streamsInfo)
+
 public:
     explicit InputFileViewModel(QObject *parent = nullptr);
 
