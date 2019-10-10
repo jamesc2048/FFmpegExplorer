@@ -1,6 +1,5 @@
-QT += quick
-
-CONFIG += c++11
+QT += quick concurrent network
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -14,7 +13,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        filterviewmodel.cpp \
+        inputfileviewmodel.cpp \
+        inputviewmodel.cpp \
+        main.cpp \
+        mainviewmodel.cpp \
+        outputviewmodel.cpp \
+        qmlutils.cpp \
+        utilities.cpp \
+        viewmodelbase.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,3 +35,13 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    filterviewmodel.hpp \
+    inputfileviewmodel.hpp \
+    inputviewmodel.hpp \
+    mainviewmodel.hpp \
+    outputviewmodel.hpp \
+    qmlutils.hpp \
+    utilities.hpp \
+    viewmodelbase.hpp

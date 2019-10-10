@@ -1,8 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "mainviewmodel.hpp"
+#include "inputfileviewmodel.hpp"
+
+#include "utilities.hpp"
 
 int main(int argc, char *argv[])
 {
+    qRegisterMetaType<QQmlObjectListModel<InputFileViewModel> *>("QQmlObjectListModel<InputFileViewModel> *");
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -18,6 +26,12 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
         }
     }, Qt::QueuedConnection);
+
+    MainViewModel viewModel;
+    Utilities utilities;
+
+    engine.rootContext()->setContextProperty("viewModel", &viewModel);
+    engine.rootContext()->setContextProperty("utilities", &utilities);
 
     engine.load(url);
 
