@@ -1,5 +1,7 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include "pch.hpp"
+
+#include "utilities.hpp"
+#include "mainviewmodel.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +20,12 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
         }
     }, Qt::QueuedConnection);
+
+    QQmlContext *ctx = engine.rootContext();
+
+    // Create instances and make available to QML
+    ctx->setContextProperty("viewModel", new MainViewModel(ctx));
+    ctx->setContextProperty("utilities", new Utilities(ctx));
 
     engine.load(url);
 
