@@ -1,4 +1,0 @@
-FFprobe -json
-FFmpeg -progress to get friendly stdout from FFmpeg
-FFmpeg pipe to stdout
-Filter graph GUI
